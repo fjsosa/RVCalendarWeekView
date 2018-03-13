@@ -165,10 +165,8 @@
  */
 - (void)groupEventsBySection {
 
-//    NSDate* date = [NSDate today:@"device"];                                      //Why does it crash on some configurations?
-    NSDate *date =
-        [NSDate parse:NSDate.today.toDateTimeString timezone:@"device"];  //If it crashes here, comment the previous line and uncomment this one
-
+    NSDate* date = [NSDate parse:NSDate.weekStart.toDateTimeString timezone:@"device"];
+    
     _eventsBySection = NSMutableDictionary.new;
 
     for (int i = 0; i < self.daysToShow; i++) {
