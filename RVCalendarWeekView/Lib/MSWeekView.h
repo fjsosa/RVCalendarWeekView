@@ -77,4 +77,6 @@
 
 -(NSDate*)firstDay;
 
+-(void)registerSupplementaryViewClasses;
+
 @end
