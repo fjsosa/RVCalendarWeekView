@@ -93,10 +93,11 @@
     self.dayColumnHeaderBackgroundClass = MSDayColumnHeaderBackground.class;
     self.unavailableHourClass           = MSUnavailableHour.class;
     self.weekendBackgroundClass         = MSWeekendBackground.class;
+    self.cellReuseIdentifier            = MSEventCellReuseIdentifier;
 }
 
 -(void)registerSupplementaryViewClasses{
-    [self.collectionView registerClass:self.eventCellClass forCellWithReuseIdentifier:MSEventCellReuseIdentifier];
+    [self.collectionView registerClass:self.eventCellClass forCellWithReuseIdentifier:self.cellReuseIdentifier ];
     [self.collectionView registerClass:self.dayColumnHeaderClass forSupplementaryViewOfKind:MSCollectionElementKindDayColumnHeader withReuseIdentifier:MSDayColumnHeaderReuseIdentifier];
     [self.collectionView registerClass:self.timeRowHeaderClass forSupplementaryViewOfKind:MSCollectionElementKindTimeRowHeader withReuseIdentifier:MSTimeRowHeaderReuseIdentifier];
     
@@ -196,7 +197,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MSEventCell *cell  = [collectionView dequeueReusableCellWithReuseIdentifier:MSEventCellReuseIdentifier forIndexPath:indexPath];
+    MSEventCell *cell  = [collectionView dequeueReusableCellWithReuseIdentifier:self.cellReuseIdentifier  forIndexPath:indexPath];
     NSString* day      = [_eventsBySection.allKeys.sort objectAtIndex:indexPath.section];
     cell.event         = [_eventsBySection[day] objectAtIndex:indexPath.row];
     

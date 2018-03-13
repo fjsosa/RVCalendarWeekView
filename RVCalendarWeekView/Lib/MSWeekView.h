@@ -60,6 +60,8 @@
 @property(nonatomic) Class unavailableHourClass;
 @property(nonatomic) Class weekendBackgroundClass;
 
+@property(nonatomic) NSString* cellReuseIdentifier;
+
 /**
  * Override this function to customize the views you want to use
  * Just change the classes that you will use
