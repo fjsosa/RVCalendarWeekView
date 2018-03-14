@@ -17,7 +17,7 @@
 
 @optional
 /**
- * Should Return an array of MSHourPerdiod ex:(00:00,10:00) 
+ * Should Return an array of MSHourPerdiod ex:(00:00,10:00)
  */
 -(NSArray*)weekView:(id)sender unavailableHoursPeriods:(NSDate*)date;
 @end
@@ -32,13 +32,14 @@
 
 @property(nonatomic) int daysToShowOnScreen;
 @property(nonatomic) int daysToShow;
+@property(nonatomic) int daysToLoadOnScroll;
 @property(strong,nonatomic) NSArray* events;
 
 @property(weak,nonatomic) id<MSWeekViewDelegate> delegate;
 
 
 /** Base property for storing each even on its sections, by default the key is the day
-  but you can customize to put anything there*/
+ but you can customize to put anything there*/
 @property(strong,nonatomic) NSMutableDictionary* eventsBySection;
 
 /**
@@ -61,6 +62,8 @@
 @property(nonatomic) Class weekendBackgroundClass;
 
 @property(nonatomic) NSString* cellReuseIdentifier;
+@property(nonatomic) NSDate* firstDay;
+@property(nonatomic) NSDate* lastDay;
 
 /**
  * Override this function to customize the views you want to use
@@ -77,8 +80,9 @@
 -(void)addEvents  :(NSArray*)events;
 -(void)removeEvent:(MSEvent*)event;
 
--(NSDate*)firstDay;
+//-(NSDate*)firstDay;
 
 -(void)registerSupplementaryViewClasses;
-
+-(void)loadAndShowDaysFrom:(NSDate*)from to:(NSDate*)to onCompletion:(void (^)(void))completion;
 @end
+

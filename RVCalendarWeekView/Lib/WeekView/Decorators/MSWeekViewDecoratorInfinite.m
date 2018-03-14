@@ -11,7 +11,7 @@
 
 #define DAYS_TO_LOAD 30
 @interface MSWeekView()
-    -(void)groupEventsByDays;
+-(void)groupEventsByDays;
 @end
 
 @implementation MSWeekViewDecoratorInfinite
@@ -28,37 +28,42 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [super scrollViewDidScroll:scrollView];
-
+    
     NSInteger currentOffset = scrollView.contentOffset.x;
     NSInteger maximumOffset = scrollView.contentSize.width - scrollView.frame.size.width;
     
     // Change 10.0 to adjust the distance from side
     if (maximumOffset - currentOffset <= 10.0 && !mLoading /*&& mShouldLoadMore*/) {
-        //NSLog(@"Load more if necessary");
+        NSLog(@"Forward Scroll Detected");
         [self loadNextDays];
+    }else if (currentOffset <= -50.0 && !mLoading /*&& mShouldLoadMore*/) {
+        NSLog(@"Back Scroll Detected: %li", (long)currentOffset);
+        [self loadPreviousDays];
     }
 }
 
 -(void)loadNextDays{
     mLoading = true;
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        NSDate * startDate  = [self.baseWeekView.firstDay   addDays:self.baseWeekView.daysToShow + 1];
-        NSDate * endDate    = [startDate                    addDays:DAYS_TO_LOAD                 - 1];
-        
-        self.baseWeekView.daysToShow += DAYS_TO_LOAD;
-        if(self.infiniteDelegate){
-            if(![self.infiniteDelegate weekView:self.baseWeekView newDaysLoaded:startDate to:endDate]){
-                [self.baseWeekView forceReload:YES];
-            }
-        }
-        else{
-            [self.baseWeekView forceReload:YES];
-        }
-        
+    
+    NSDate * startDate  = [self.baseWeekView.lastDay   addDays:1];
+    NSDate * endDate    = [startDate addDays:self.baseWeekView.daysToLoadOnScroll-1];
+    [self.baseWeekView loadAndShowDaysFrom:startDate to:endDate onCompletion:^{
         mLoading = false;
-    });    
+    }];
+    
 }
 
 
+-(void)loadPreviousDays{
+    mLoading = true;
+    NSDate * startDate  = [self.baseWeekView.firstDay addDays:-self.baseWeekView.daysToLoadOnScroll];
+    NSDate * endDate    = [self.baseWeekView.firstDay addDays:-1 ];
+    
+    [self.baseWeekView loadAndShowDaysFrom:startDate to:endDate onCompletion:^{
+        mLoading = false;
+    }];
+    
+}
+
 @end
+

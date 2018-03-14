@@ -51,8 +51,9 @@
 
 -(void)setup{
     
-    self.daysToShowOnScreen = 6;
-    self.daysToShow         = 30;
+    self.daysToShowOnScreen = 3;
+    self.daysToShow         = 7;
+    self.daysToLoadOnScroll = 7;
     self.weekFlowLayout     = [MSCollectionViewCalendarLayout new];
     self.weekFlowLayout.delegate = self;
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.weekFlowLayout];
@@ -62,8 +63,8 @@
     self.collectionView.showsVerticalScrollIndicator    = NO;
     self.collectionView.showsHorizontalScrollIndicator  = NO;
     /*if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
-        self.collectionView.pagingEnabled = YES;
-    }*/
+     self.collectionView.pagingEnabled = YES;
+     }*/
     
     [self addSubview:self.collectionView];
     [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
@@ -125,6 +126,7 @@
             [self groupEventsBySection];
         [self.weekFlowLayout invalidateLayoutCache];
         [self.collectionView reloadData];
+        NSLog(@"Calendar View Period: %@ - %@", self.firstDay, self.lastDay);
     });
 }
 
@@ -133,9 +135,19 @@
 }
 
 -(NSDate*)firstDay{
-    return [self.weekFlowLayout dateForDayColumnHeaderAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    if(_firstDay == nil)
+    {
+        self.firstDay = [NSDate parse:NSDate.weekStart.toDateTimeString timezone:@"device"];
+    }
+    return _firstDay;// [self.weekFlowLayout dateForDayColumnHeaderAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 }
-
+-(void) setDaysToShow:(int)daysToShow
+{
+    _daysToShow = daysToShow;
+    NSDate* fDay = [self firstDay];
+    _lastDay = [fDay addDays:_daysToShow - 1];
+    
+}
 //================================================
 #pragma mark - Set Events
 //================================================
@@ -164,11 +176,11 @@
  * Note that in the standard calendar, each section is a day"
  */
 - (void)groupEventsBySection {
-
-    NSDate* date = [NSDate parse:NSDate.weekStart.toDateTimeString timezone:@"device"];
+    
+    NSDate* date = self.firstDay;//[[NSDate parse:NSDate.weekStart.toDateTimeString timezone:@"device"] addDays:-10];
     
     _eventsBySection = NSMutableDictionary.new;
-
+    
     for (int i = 0; i < self.daysToShow; i++) {
         [_eventsBySection setObject:[self eventsByDate:date] forKey:date.toDeviceTimezoneDateString];
         date = [date addDay];
@@ -183,7 +195,7 @@
 #pragma mark - CollectionView Datasource
 //================================================
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{   
+{
     return _eventsBySection.count;
 }
 
@@ -238,20 +250,20 @@
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout startTimeForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSString *day = [_eventsBySection.allKeys.sort objectAtIndex:indexPath.section];
     MSEvent *ev = [_eventsBySection[day] objectAtIndex:indexPath.row];
-
+    
     if ([ev.StartDate.toDateString isEqualToString:day])
         return ev.StartDate;
-
+    
     else return [ev.StartDate setTime:@"00:00:00" timezone:@"device"];
 }
 
 - (NSDate *)collectionView:(UICollectionView *)collectionView layout:(MSCollectionViewCalendarLayout *)collectionViewCalendarLayout endTimeForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSString *day = [_eventsBySection.allKeys.sort objectAtIndex:indexPath.section];
     MSEvent *ev = [_eventsBySection[day] objectAtIndex:indexPath.row];
-
+    
     if ([ev.EndDate.toDateString isEqualToString:day])
         return ev.EndDate;
-
+    
     else return [ev.EndDate setTime:@"23:59:59" timezone:@"device"];
 }
 
@@ -283,6 +295,35 @@
     
 }
 
+
+//================================================
+#pragma mark - Week Navigation
+//================================================
+
+- (void) loadAndShowDaysFrom:(NSDate*)from to:(NSDate*)to onCompletion:(void (^)(void))completion
+{
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        DTTimePeriod* period = [[DTTimePeriod alloc] initWithStartDate:from endDate:to];
+        self.daysToShow += period.durationInDays ;
+        
+        NSLog(@"Infinite Delegate CallBack New Period Confirmed: %@ - %@", from, to);
+        if([self.firstDay compare:from] == NSOrderedDescending)
+        {
+            self.firstDay = from;
+        }
+        if([self.lastDay compare:to] == NSOrderedAscending)
+        {
+            self.lastDay = to;
+        }
+        [self forceReload:YES];
+        if(completion)
+        {
+            completion();
+        }
+    });
+}
+
 //================================================
 #pragma mark - Dealloc
 //================================================
@@ -296,3 +337,4 @@
 }
 
 @end
+
