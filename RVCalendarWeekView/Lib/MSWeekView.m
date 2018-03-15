@@ -53,7 +53,8 @@
     
     self.daysToShowOnScreen = 3;
     self.daysToShow         = 7;
-    self.daysToLoadOnScroll = 7;
+    self.daysToLoadOnForwardScroll = 7;
+    self.daysToLoadOnBackwardScroll = 1;
     self.weekFlowLayout     = [MSCollectionViewCalendarLayout new];
     self.weekFlowLayout.delegate = self;
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.weekFlowLayout];
@@ -295,6 +296,9 @@
     
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+}
 
 //================================================
 #pragma mark - Week Navigation

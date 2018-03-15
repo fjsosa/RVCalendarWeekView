@@ -32,7 +32,8 @@
 
 @property(nonatomic) int daysToShowOnScreen;
 @property(nonatomic) int daysToShow;
-@property(nonatomic) int daysToLoadOnScroll;
+@property(nonatomic) int daysToLoadOnForwardScroll;
+@property(nonatomic) int daysToLoadOnBackwardScroll;
 @property(strong,nonatomic) NSArray* events;
 
 @property(weak,nonatomic) id<MSWeekViewDelegate> delegate;

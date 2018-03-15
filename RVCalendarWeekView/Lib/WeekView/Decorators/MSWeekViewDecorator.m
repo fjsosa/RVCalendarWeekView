@@ -80,6 +80,12 @@
     [_weekView scrollViewDidScroll:scrollView];
 }
 
+- (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [_weekView scrollViewWillBeginDragging:scrollView];
+}
+
+
 //================================================
 #pragma mark - Week Flow Delegate
 //================================================
