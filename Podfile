@@ -1,7 +1,6 @@
 platform :ios, '9.0'
 
 target 'RVCalendarWeekView' do
-    use_frameworks!
     pod 'Collection'
     pod 'EasyDate'
     pod 'UIColor-HexString'
