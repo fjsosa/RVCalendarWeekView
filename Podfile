@@ -16,9 +16,6 @@ post_install do |installer|
             config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
             config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'MAS_SHORTHAND=1'
         end
-        installer.pods_project.build_configuration_list.build_configurations.each do |configuration|
-            configuration.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
-        end
     end
 end
 
