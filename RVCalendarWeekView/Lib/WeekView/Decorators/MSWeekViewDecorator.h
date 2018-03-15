@@ -36,7 +36,7 @@
 -(int)getDayIndexForX:(float)x;
 -(CGFloat)round:(float)number toNearest:(float)pivot;
 -(CGFloat)round:(float)number toLowest:(float)pivot;
-
+-(float)viewYToContentY:(float)y;
 //=========================================================
 #pragma mark -
 //=========================================================

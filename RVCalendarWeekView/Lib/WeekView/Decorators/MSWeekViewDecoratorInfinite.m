@@ -48,7 +48,7 @@ bool enableDataLoad;
         if (maximumOffset - currentOffset <= 10.0 && !mLoading /*&& mShouldLoadMore*/) {
             NSLog(@"Forward Scroll Detected");
             [self loadNextDays];
-        }else if (currentOffset <= 0.0 && !mLoading /*&& mShouldLoadMore*/) {
+        }else if (currentOffset < 0.0 && !mLoading /*&& mShouldLoadMore*/) {
             NSLog(@"Back Scroll Detected: %li", (long)currentOffset);
             [self loadPreviousDays];
         }

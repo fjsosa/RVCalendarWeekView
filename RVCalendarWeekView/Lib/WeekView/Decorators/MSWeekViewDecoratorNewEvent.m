@@ -34,19 +34,25 @@
 -(void)onTap:(UIGestureRecognizer*)gestureRecognizer{
     if (gestureRecognizer.state == UIGestureRecognizerStateRecognized) {
         NSDate* date = [self dateForGesture:gestureRecognizer];
-        
+        bool onHeader = [self isHeaderGesture:gestureRecognizer];
         if(self.createEventDelegate)
-            [self.createEventDelegate weekView:self.baseWeekView onTapAt:date];
+            [self.createEventDelegate weekView:self.baseWeekView onTapAt:date atHeader:onHeader];
     }
 }
 
 -(void)onLongPress:(UIGestureRecognizer*)gestureRecognizer{
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         NSDate* date = [self dateForGesture:gestureRecognizer];
-        
+        bool onHeader = [self isHeaderGesture:gestureRecognizer];
         if(self.createEventDelegate)
-            [self.createEventDelegate weekView:self.baseWeekView onLongPressAt:date];
+            [self.createEventDelegate weekView:self.baseWeekView onLongPressAt:date atHeader:onHeader];
     }
+}
+
+-(Boolean)isHeaderGesture:(UIGestureRecognizer*)gestureRecognizer{
+    CGPoint cp  = [gestureRecognizer locationInView:self.baseWeekView];
+    float y   = [self viewYToContentY:cp.y];
+    return y < 0;
 }
 
 -(NSDate*)dateForGesture:(UIGestureRecognizer*)gestureRecognizer{
