@@ -130,13 +130,13 @@
 #pragma mark - Week View Decorator New event delegate
 //=========================================
 -(void)weekView:(MSWeekView*)weekView onLongPressAt:(NSDate*)date atHeader:(bool)atHeader{
-    NSLog(@"Long pressed at: %@", date);
+    NSLog(@"Long pressed at: %@ - %i", date, atHeader);
     MSEvent *newEvent = [MSEvent make:date title:@"New Event" subtitle:@"Platinium stadium"];
     [_weekView addEvent:newEvent];
 }
 
 -(void)weekView:(MSWeekView*)weekView onTapAt:(NSDate*)date  atHeader:(bool)atHeader{
-    NSLog(@"Short pressed at: %@", date);
+    NSLog(@"Short pressed at: %@ - Header: %i", date, atHeader);
 }
 
 

@@ -8,10 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "DateTools.h"
-//@import DateTools;
 
 @interface MSEvent : DTTimePeriod
-
 
 @property (nonatomic, strong) NSString  *title;
 @property (nonatomic, strong) NSString  *location;

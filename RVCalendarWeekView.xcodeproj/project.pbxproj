@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		61380990A7EC70E0593B15E2 /* Pods_RVCalendarWeekView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D820BD6ABE44C96EC9FE28C4 /* Pods_RVCalendarWeekView.framework */; };
+		026C1C03DD9ACA0FCA169F80 /* libPods-RVCalendarWeekView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21DDA14F18DEFB22385623C3 /* libPods-RVCalendarWeekView.a */; };
 		76276EB71D6B81D4002C1D39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EB61D6B81D4002C1D39 /* main.m */; };
 		76276EBA1D6B81D4002C1D39 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EB91D6B81D4002C1D39 /* AppDelegate.m */; };
 		76276EBD1D6B81D4002C1D39 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76276EBC1D6B81D4002C1D39 /* ViewController.m */; };
@@ -54,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		016043077DD4C904B6A3A6BE /* Pods-RVCalendarWeekView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RVCalendarWeekView.release.xcconfig"; path = "Pods/Target Support Files/Pods-RVCalendarWeekView/Pods-RVCalendarWeekView.release.xcconfig"; sourceTree = "<group>"; };
+		21DDA14F18DEFB22385623C3 /* libPods-RVCalendarWeekView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RVCalendarWeekView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A9198AF6C016D51B48E4CB /* Pods-RVCalendarWeekView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RVCalendarWeekView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RVCalendarWeekView/Pods-RVCalendarWeekView.debug.xcconfig"; sourceTree = "<group>"; };
 		76276EB21D6B81D4002C1D39 /* RVCalendarWeekView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RVCalendarWeekView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76276EB61D6B81D4002C1D39 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -117,7 +118,6 @@
 		76FC4A051D78678C004CF995 /* MSWeekViewDecoratorNewEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MSWeekViewDecoratorNewEvent.m; path = Lib/WeekView/Decorators/MSWeekViewDecoratorNewEvent.m; sourceTree = "<group>"; };
 		76FC4A071D786E7F004CF995 /* MSWeekViewDecoratorFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MSWeekViewDecoratorFactory.h; path = Lib/WeekView/Decorators/MSWeekViewDecoratorFactory.h; sourceTree = "<group>"; };
 		76FC4A081D786E7F004CF995 /* MSWeekViewDecoratorFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MSWeekViewDecoratorFactory.m; path = Lib/WeekView/Decorators/MSWeekViewDecoratorFactory.m; sourceTree = "<group>"; };
-		D820BD6ABE44C96EC9FE28C4 /* Pods_RVCalendarWeekView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RVCalendarWeekView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61380990A7EC70E0593B15E2 /* Pods_RVCalendarWeekView.framework in Frameworks */,
+				026C1C03DD9ACA0FCA169F80 /* libPods-RVCalendarWeekView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,7 +142,7 @@
 		0241F19EAD6E623E5EB9DC2C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D820BD6ABE44C96EC9FE28C4 /* Pods_RVCalendarWeekView.framework */,
+				21DDA14F18DEFB22385623C3 /* libPods-RVCalendarWeekView.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
