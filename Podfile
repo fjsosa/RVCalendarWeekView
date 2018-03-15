@@ -1,11 +1,11 @@
 platform :ios, '9.0'
 
 target 'RVCalendarWeekView' do
-
-pod 'Collection'
-pod 'EasyDate'
-pod 'UIColor-HexString'
-pod 'Masonry'
+    use_frameworks!
+    pod 'Collection'
+    pod 'EasyDate'
+    pod 'UIColor-HexString'
+    pod 'Masonry'
 
 end
 
@@ -15,6 +15,9 @@ post_install do |installer|
         target.build_configurations.each do |config|
             config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
             config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'MAS_SHORTHAND=1'
+        end
+        installer.pods_project.build_configuration_list.build_configurations.each do |configuration|
+            configuration.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
         end
     end
 end
