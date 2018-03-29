@@ -717,6 +717,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RVCalendarWeekView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = works.revo.RVCalendarWeekView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -729,6 +730,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RVCalendarWeekView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = works.revo.RVCalendarWeekView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
